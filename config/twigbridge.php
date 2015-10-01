@@ -23,7 +23,7 @@ return [
         | File extension for Twig view files.
         |
         */
-        'extension' => 'twig',
+        'extension' => 'twig.php',
 
         /*
         |--------------------------------------------------------------------------
