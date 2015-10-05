@@ -23,7 +23,7 @@ return [
         | File extension for Twig view files.
         |
         */
-        'extension' => 'twig.php',
+        'extension' => 'twig',
 
         /*
         |--------------------------------------------------------------------------
@@ -66,7 +66,7 @@ return [
 
             // If set to true, auto-escaping will be enabled by default for all templates.
             // default: 'html'
-            'autoescape' => 'html',
+            'autoescape' => false,
 
             // A flag that indicates which optimizations to apply
             // (default to -1 -- all optimizations are enabled; set it to 0 to disable)
@@ -111,9 +111,12 @@ return [
             'TwigBridge\Extension\Laravel\Translator',
             'TwigBridge\Extension\Laravel\Url',
             
-            // 'TwigBridge\Extension\Laravel\Form',
-            // 'TwigBridge\Extension\Laravel\Html',
+            'TwigBridge\Extension\Laravel\Form',
+            'TwigBridge\Extension\Laravel\Html',
             // 'TwigBridge\Extension\Laravel\Legacy\Facades',
+
+            'TwigBridge\Extension\CmsCanvas\Theme',
+            'TwigBridge\Extension\CmsCanvas\Content',
         ],
 
         /*
@@ -143,7 +146,9 @@ return [
         | in order to be marked as safe.
         |
         */
-        'facades' => [],
+        'facades' => [
+            'DB',
+        ],
 
         /*
         |--------------------------------------------------------------------------

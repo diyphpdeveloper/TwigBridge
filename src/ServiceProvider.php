@@ -12,6 +12,7 @@
 namespace TwigBridge;
 
 use Illuminate\View\ViewServiceProvider;
+use TwigBridge\StringView\Factory as StringViewFactory;
 use InvalidArgumentException;
 use Twig_Loader_Chain;
 use Twig_Loader_Array;
@@ -38,6 +39,7 @@ class ServiceProvider extends ViewServiceProvider
         $this->registerOptions();
         $this->registerLoaders();
         $this->registerEngine();
+        $this->registerStringView();
     }
 
     /**
@@ -258,6 +260,18 @@ class ServiceProvider extends ViewServiceProvider
                 $this->app['twig.loader.viewfinder'],
                 $this->app['config']->get('twigbridge.twig.globals', [])
             );
+        });
+    }
+
+    /**
+     * Register string view bindings.
+     *
+     * @return void
+     */
+    public function registerStringView()
+    {
+        $this->app->bind('stringview', function ($app) {
+            return new StringViewFactory($app);
         });
     }
 

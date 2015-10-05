@@ -52,6 +52,7 @@ class Translator extends Twig_Extension
         return [
             new Twig_SimpleFunction('trans', [$this->translator, 'trans']),
             new Twig_SimpleFunction('trans_choice', [$this->translator, 'transChoice']),
+            new Twig_SimpleFunction('trans_locale', [$this->translator, 'getLocale']),
         ];
     }
 
