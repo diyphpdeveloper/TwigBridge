@@ -13,6 +13,7 @@ namespace TwigBridge\Extension\CmsCanvas;
 
 use Twig_Extension;
 use Twig_SimpleFunction;
+use Twig_SimpleFilter;
 use CmsCanvas\Content\Content as ContentManager;
 
 /**
@@ -50,8 +51,19 @@ class Content extends Twig_Extension
     {
         return [
             new Twig_SimpleFunction('entries', [$this->content, 'entries'], ['is_variadic' => true]),
-            new Twig_SimpleFunction('entry', [$this->content, 'entry']),
+            new Twig_SimpleFunction('entry', [$this->content, 'entry'], ['is_variadic' => true]),
             new Twig_SimpleFunction('navigation', [$this->content, 'navigation'], ['is_variadic' => true]),
+            new Twig_SimpleFunction('breadcrumb', [$this->content, 'breadcrumb'], ['is_variadic' => true]),
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFilters()
+    {
+        return [
+            new Twig_SimpleFilter('user_date', [$this->content, 'userDate']),
         ];
     }
 }

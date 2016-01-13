@@ -39,6 +39,11 @@ class StringView implements ViewContract {
      */
     protected $template;
 
+    /**
+     * @var string
+     */
+    protected $render;
+
     /** 
      * Constructor for StringView
      *
@@ -157,13 +162,36 @@ class StringView implements ViewContract {
     }
 
     /**
+     * Render the template prior to being casted to a string
+     *
+     * @return $this
+     */
+    public function prerender()
+    {
+        try {
+            $this->render();
+        } catch(\Exception $e) {
+            $previousException = $e->getPrevious();
+            if ($previousException instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+                throw $previousException;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * Renders the view to a string
      *
      * @return string
      */
     public function __toString()
     {
-        return $this->render();
+        try {
+            return $this->render();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -185,7 +213,11 @@ class StringView implements ViewContract {
             throw new InvalidArgumentException('A valid template does not exist.');
         }
 
-        return $this->template->render($this->data);
+        if ($this->render == null) {
+            $this->render = $this->template->render($this->data);
+        }
+
+        return $this->render;
     }
 
     /**

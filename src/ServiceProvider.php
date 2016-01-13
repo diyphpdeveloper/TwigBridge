@@ -242,6 +242,11 @@ class ServiceProvider extends ViewServiceProvider
                     $twig->setLexer($lexer);
                 }
 
+                $defaultTimezone = $this->app['config']->get('cmscanvas::config.default_timezone');
+                if ($defaultTimezone != null) {
+                    $twig->getExtension('core')->setTimezone($defaultTimezone);
+                }
+
                 return $twig;
             },
             true
