@@ -51,7 +51,7 @@ class Content extends Twig_Extension
     {
         return [
             new Twig_SimpleFunction('entries', [$this->content, 'entries'], ['is_variadic' => true]),
-            new Twig_SimpleFunction('entry', [$this->content, 'entry'], ['is_variadic' => true]),
+            new Twig_SimpleFunction('entry_first', [$this->content, 'entryFirst'], ['is_variadic' => true]),
             new Twig_SimpleFunction('entry', [$this->content, 'entry']),
             new Twig_SimpleFunction('navigation', [$this->content, 'navigation'], ['is_variadic' => true]),
             new Twig_SimpleFunction('breadcrumb', [$this->content, 'breadcrumb'], ['is_variadic' => true]),
