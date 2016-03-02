@@ -190,7 +190,14 @@ class StringView implements ViewContract {
         try {
             return $this->render();
         } catch (\Exception $e) {
-            return $e->getMessage();
+            $message = $e->getMessage();
+            $previous = $e->getPrevious();
+
+            if ($previous != null) {
+                $message .= ' :: '.get_class($previous).' :: '.$previous->getMessage();
+            }
+
+            return $message;
         }
     }
 
