@@ -55,6 +55,7 @@ class Content extends Twig_Extension
             new Twig_SimpleFunction('entry', [$this->content, 'entry']),
             new Twig_SimpleFunction('navigation', [$this->content, 'navigation'], ['is_variadic' => true]),
             new Twig_SimpleFunction('breadcrumb', [$this->content, 'breadcrumb'], ['is_variadic' => true]),
+            new Twig_SimpleFunction('is_home_page', [$this->content, 'isHomePage']),
         ];
     }
 
