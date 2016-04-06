@@ -14,6 +14,7 @@ namespace TwigBridge\Extension\CmsCanvas;
 use Twig_Extension;
 use Twig_SimpleFunction;
 use Twig_SimpleFilter;
+use Twig_SimpleTest;
 use CmsCanvas\Content\Content as ContentManager;
 
 /**
@@ -66,6 +67,21 @@ class Content extends Twig_Extension
     {
         return [
             new Twig_SimpleFilter('user_date', [$this->content, 'userDate']),
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTests()
+    {
+        return [
+            new Twig_SimpleTest('entry', function($value) {
+                return ($value instanceof \CmsCanvas\Content\Entry\Render);
+            }),
+            new Twig_SimpleTest('content_type', function($value) {
+                return ($value instanceof \CmsCanvas\Content\Type\Render);
+            }),
         ];
     }
 }
