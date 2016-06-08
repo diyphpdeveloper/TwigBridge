@@ -57,6 +57,7 @@ class Content extends Twig_Extension
             new Twig_SimpleFunction('navigation', [$this->content, 'navigation'], ['is_variadic' => true]),
             new Twig_SimpleFunction('breadcrumb', [$this->content, 'breadcrumb'], ['is_variadic' => true]),
             new Twig_SimpleFunction('is_home_page', [$this->content, 'isHomePage']),
+            new Twig_SimpleFunction('thumbnail', [$this->content, 'thumbnail'], ['is_variadic' => true]),
         ];
     }
 
@@ -67,6 +68,7 @@ class Content extends Twig_Extension
     {
         return [
             new Twig_SimpleFilter('user_date', [$this->content, 'userDate']),
+            new Twig_SimpleFilter('thumbnail', [$this->content, 'thumbnail'], ['is_variadic' => true]),
         ];
     }
 
